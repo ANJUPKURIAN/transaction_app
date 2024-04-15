@@ -31,14 +31,13 @@ class _HomeScreenState extends State<HomeScreen> {
             left: 20,
           ),
           child: CircleAvatar(
-            backgroundImage: NetworkImage(
-                "https://images.pexels.com/photos/1772475/pexels-photo-1772475.jpeg?auto=compress&cs=tinysrgb&w=600"),
-          ),
+            backgroundImage: AssetImage("asset/girl_image.jpg"),
+        ),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Hello Angel",
+            Text("Hello Anju",
                 style: TextStyle(
                     color: ColorConstants.primarywhite,
                     fontSize: 20,

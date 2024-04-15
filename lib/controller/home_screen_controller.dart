@@ -19,15 +19,15 @@ class HomeScreenController {
     });
   }
 
-  static Future insertDatas() async {
+  static Future addDatas() async {
     await database.rawInsert(
         'INSERT INTO Details(type, title, category, date, amount) VALUES(?, ?, ?, ?, ?)',
-        ['Income', 'A-one food', 'food', 'monday', 2104]);
+        ['Income', 'A1 food', 'food', 'tuesday', 1234]);
   }
 
   //get all data from database
   static Future getDatas() async {
-    data = await database.rawQuery('SELECT * FROM Details');
+    data = await database.rawQuery('SELECT * FROM Record');
     transactionList = data
         .map((e) => MoneyTransactionModel(
             id: int.parse(e["id"].toString()),

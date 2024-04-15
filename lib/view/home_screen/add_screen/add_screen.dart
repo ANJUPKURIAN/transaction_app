@@ -138,7 +138,7 @@ class _AddScreenState extends State<AddScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await HomeScreenController.insertDatas();
+                  await HomeScreenController.addDatas();
                   await HomeScreenController.getDatas();
                 },
                 style: ButtonStyle(

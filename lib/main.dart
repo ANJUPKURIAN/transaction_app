@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:transaction_app/controller/home_screen_controller.dart';
 import 'package:transaction_app/view/home_screen/home_screen.dart';
 
-
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HomeScreenController.initDb();
@@ -18,10 +16,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(home: HomeScreen());
   }
 }
-
-
-
-
 
 
 

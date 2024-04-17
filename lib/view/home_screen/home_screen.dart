@@ -31,8 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
             left: 20,
           ),
           child: CircleAvatar(
-            backgroundImage: AssetImage("asset/girl_image.jpg"),
-        ),
+            backgroundImage: AssetImage(
+            "asset/girl_image.jpg"),
+          ),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: ColorConstants.primarywhite.withOpacity(0.6)),
                   ),
                   Text(
-                    "\$14,564",
+                    "\$${HomeScreenController.transactionList.lastOrNull?.balanceAmount ?? "0"}",
                     style: TextStyle(
                         fontSize: 40,
                         color: ColorConstants.primarywhite,
@@ -112,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: ColorConstants.primarygreen),
                                   ),
                                   Text(
-                                    "\$2653",
+                                    "\$${HomeScreenController.transactionList.lastOrNull?.totalIncome ?? "0"}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25),
@@ -146,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: ColorConstants.primaryred),
                                   ),
                                   Text(
-                                    "\$4561",
+                                    "\$${HomeScreenController.transactionList.lastOrNull?.totalExpense ?? "0"}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25),
@@ -199,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           subtitle: Text(HomeScreenController
                               .transactionList[index].category),
                           trailing: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(

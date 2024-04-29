@@ -13,13 +13,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    fetchData();
+       WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await HomeScreenController.getDatas();
+      setState(() {});
+    });
+    //fetchData();
     super.initState();
   }
 
-  fetchData() async {
-    await HomeScreenController.getDatas();
-  }
+  // fetchData() async {
+  //   await HomeScreenController.getDatas();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             "asset/girl_image.jpg"),
           ),
         ),
+
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -56,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(width: 20)
         ],
       ),
+
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,13 +84,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: ColorConstants.primarywhite.withOpacity(0.6)),
                   ),
                   Text(
-                    "\$${HomeScreenController.transactionList.lastOrNull?.balanceAmount ?? "0"}",
+                    "\$${HomeScreenController.balanceAmount}",
                     style: TextStyle(
                         fontSize: 40,
                         color: ColorConstants.primarywhite,
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 20),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -113,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: ColorConstants.primarygreen),
                                   ),
                                   Text(
-                                    "\$${HomeScreenController.transactionList.lastOrNull?.totalIncome ?? "0"}",
+                                    "\$${HomeScreenController.totalIncome}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25),
@@ -147,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: ColorConstants.primaryred),
                                   ),
                                   Text(
-                                    "\$${HomeScreenController.transactionList.lastOrNull?.totalExpense ?? "0"}",
+                                    "\$${HomeScreenController.totalExpense}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25),
@@ -169,6 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
+
             Column(
               children: List.generate(
                   HomeScreenController.transactionList.length,
@@ -197,8 +205,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             HomeScreenController.transactionList[index].title,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
+
                           subtitle: Text(HomeScreenController
                               .transactionList[index].category),
+                              
                           trailing: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisSize: MainAxisSize.min,

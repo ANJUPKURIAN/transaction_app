@@ -27,6 +27,7 @@ class _AddScreenState extends State<AddScreen> {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
       ),
+      
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: SingleChildScrollView(

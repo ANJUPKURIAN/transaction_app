@@ -30,32 +30,30 @@ class HomeScreenController {
        required String category,
        required String date,
        required int amount}) async {
-    if (mode == "Income") 
-    {
-      totalIncome = totalIncome + amount;
-    } 
-    else
-     {
-      totalExpense = totalExpense + amount;
-    }
+    // if (mode == "Income") 
+    // {
+    //   totalIncome = totalIncome + amount;
+    // } 
+    // else
+    //  {
+    //   totalExpense = totalExpense + amount;
+    // }
 
-    balanceAmount = totalIncome - totalExpense;
+    // balanceAmount = totalIncome - totalExpense;
 
     await database.rawInsert(
-        'INSERT INTO Details(type, title, category, date, amount, totalBalance, totalIncome, totalExpense) VALUES(?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO Details(mode, title, category, date, amount) VALUES(?, ?, ?, ?, ?,)',
         [
           mode,
           title,
           category,
           date,
           amount,
-          balanceAmount,
-          totalIncome,
-          totalExpense
+          // balanceAmount,
+          // totalIncome,
+          // totalExpense
         ]);
-
-    
-  }
+    }
 
   //get all data from database
   static Future getDatas() async {
@@ -68,24 +66,45 @@ class HomeScreenController {
             category: e['category'].toString(),
             date: e['date'].toString(),
             amount: int.parse(e["amount"].toString()),
-            balanceAmount: int.parse(e['totalBalance'].toString()),
-            totalIncome: int.parse(e['totalIncome'].toString()),
-            totalExpense: int.parse(e['totalExpense'].toString())))
+            // balanceAmount: int.parse(e['totalBalance'].toString()),
+            // totalIncome: int.parse(e['totalIncome'].toString()),
+            // totalExpense: int.parse(e['totalExpense'].toString()),
+             ))
         .toList();
-    log(data.toString());
+     log(data.toString());
+     calculate();
   }
 
-  static addIncome() {
-    for (int i = 0; i < transactionList.length; i++) {
-      totalIncome = totalIncome + transactionList[i].amount;
-      log(totalIncome.toString());
-    }
-  }
+  // static addIncome() {
+  //   for (int i = 0; i < transactionList.length; i++) {
+  //     totalIncome = totalIncome + transactionList[i].amount;
+  //     log(totalIncome.toString());
+  //   }
 
-  static addExpense() {
-    for (int i = 0; i < transactionList.length; i++) {
-      totalExpense = totalExpense + transactionList[i].amount;
-      log(totalExpense.toString());
+   // static addExpense() {
+  //   for (int i = 0; i < transactionList.length; i++) {
+  //     totalExpense = totalExpense + transactionList[i].amount;
+  //     log(totalExpense.toString());
+  //   }
+  // }
+
+
+
+ static calculate() {
+    balanceAmount = 1000;
+    totalIncome = 0;
+    totalExpense = 0;
+    for (var i = 0; i < transactionList.length; i++) {
+      if (transactionList[i].transactionMode == "Income") {
+        totalIncome = totalIncome + transactionList[i].amount;
+      } else {
+        totalExpense = totalExpense + transactionList[i].amount;
+      }
     }
-  }
+    balanceAmount = 1000 + totalIncome - totalExpense;
+    log(balanceAmount.toString());
+    log(balanceAmount.toString());
+
+    }
+
 }
